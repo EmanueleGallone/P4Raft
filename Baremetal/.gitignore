@@ -1,0 +1,10 @@
+/build
+/logs
+/pcaps
+/.idea
+/__pycache*
+/mininet
+/.empty
+/utils/*/*.pyc
+*.pyc
+*.log

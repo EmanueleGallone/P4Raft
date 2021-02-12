@@ -1,0 +1,214 @@
+{
+  "target": "bmv2",
+  "p4info": "build/Raft.p4.p4info.txt",
+  "bmv2_json": "build/Raft.json",
+  "table_entries": [
+    {
+      "table": "MyIngress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.0.0", 16]
+      },
+      "action_name": "MyIngress.ipv4_forward",
+      "action_params": {
+        "dstAddr": "08:00:00:00:03:00",
+        "port": 4
+      }
+    },
+    {
+      "table": "MyIngress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.5.5", 32]
+      },
+      "action_name": "MyIngress.ipv4_forward",
+      "action_params": {
+        "dstAddr": "08:00:00:00:05:05",
+        "port": 2
+      }
+    },
+    {
+      "table": "MyIngress.follower",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "hdr.raft.messageType": 1,
+        "hdr.raft.destinationID": 255
+      },
+      "action_name": "MyIngress.follower_handle_heartbeat",
+      "action_params": {}
+    },
+    {
+      "table": "MyIngress.follower",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "hdr.raft.messageType": 2,
+        "hdr.raft.destinationID": 255
+      },
+      "action_name": "MyIngress.follower_handle_log_replication",
+      "action_params": {}
+    },
+    {
+      "table": "MyIngress.follower",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "hdr.raft.messageType": 6,
+        "hdr.raft.destinationID": 255
+      },
+      "action_name": "MyIngress.follower_commit_value",
+      "action_params": {}
+    },
+    {
+      "table": "MyIngress.follower",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "hdr.raft.messageType": 8,
+        "hdr.raft.destinationID": 5
+      },
+      "action_name": "MyIngress.follower_handle_recovery_message",
+      "action_params": {}
+    },
+    {
+      "table": "MyIngress.follower",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "hdr.raft.messageType": 10,
+        "hdr.raft.destinationID": 5
+      },
+      "action_name": "MyIngress.follower_timeout",
+      "action_params": {}
+    },
+    {
+      "table": "MyIngress.raft_forwarding",
+      "match": {
+        "hdr.raft.destinationID": 1
+      },
+      "action_name": "MyIngress.raft_forward",
+      "action_params": {
+        "port": 4
+      }
+    },
+    {
+      "table": "MyIngress.raft_forwarding",
+      "match": {
+        "hdr.raft.destinationID": 2
+      },
+      "action_name": "MyIngress.raft_forward",
+      "action_params": {
+        "port": 4
+      }
+    },
+    {
+      "table": "MyIngress.raft_forwarding",
+      "match": {
+        "hdr.raft.destinationID": 3
+      },
+      "action_name": "MyIngress.raft_forward",
+      "action_params": {
+        "port": 4
+      }
+    },
+    {
+      "table": "MyIngress.raft_forwarding",
+      "match": {
+        "hdr.raft.destinationID": 4
+      },
+      "action_name": "MyIngress.raft_forward",
+      "action_params": {
+        "port": 4
+      }
+    },
+    {
+      "table": "MyIngress.raft_redirect",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "meta.raft_metadata.leaderID": 1,
+        "hdr.raft.messageType": 255
+      },
+      "action_name": "MyIngress.raft_redirect_to_leader",
+      "action_params": {
+        "port": 4,
+        "controller_ip": 167772417,
+        "destinationID": 1
+      }
+    },
+    {
+      "table": "MyIngress.raft_redirect",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "meta.raft_metadata.leaderID": 2,
+        "hdr.raft.messageType": 255
+      },
+      "action_name": "MyIngress.raft_redirect_to_leader",
+      "action_params": {
+        "port": 4,
+        "controller_ip": 167772674,
+        "destinationID": 2
+      }
+    },
+    {
+      "table": "MyIngress.raft_redirect",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "meta.raft_metadata.leaderID": 3,
+        "hdr.raft.messageType": 255
+      },
+      "action_name": "MyIngress.raft_redirect_to_leader",
+      "action_params": {
+        "port": 4,
+        "controller_ip": 167772931,
+        "destinationID": 3
+      }
+    },
+    {
+      "table": "MyIngress.raft_redirect",
+      "match": {
+        "meta.raft_metadata.role": 0,
+        "meta.raft_metadata.leaderID": 4,
+        "hdr.raft.messageType": 255
+      },
+      "action_name": "MyIngress.raft_redirect_to_leader",
+      "action_params": {
+        "port": 4,
+        "controller_ip": 167773188,
+        "destinationID": 4
+      }
+    }
+  ],
+  "multicast_group_entries" : [
+    {
+      "multicast_group_id" : 1,
+      "replicas" : [
+        {
+          "egress_port" : 2,
+          "instance" : 1
+        },
+        {
+          "egress_port" : 3,
+          "instance" : 1
+        },
+        {
+          "egress_port" : 4,
+          "instance" : 1
+        }
+      ]
+    }
+  ],
+    "clone_session_entries" : [
+    {
+      "clone_session_id" : 2,
+      "replicas" : [
+        {
+          "egress_port" : 511,
+          "instance" : 2
+        }
+      ]
+    },
+    {
+      "clone_session_id" : 5,
+      "replicas" : [
+        {
+          "egress_port" : 2,
+          "instance" : 5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+/build
+/logs
+/pcaps
+/.idea
+/__pycache*
+/mininet
+/.empty
+/utils/*/*.pyc
+*.pyc
+*.log
+
+# Build results
+TrafficGeneratorCsharp/[Dd]ebug/
+TrafficGeneratorCsharp/[Dd]ebugPublic/
+TrafficGeneratorCsharp/[Rr]elease/
+TrafficGeneratorCsharp/[Rr]eleases/
+TrafficGeneratorCsharp/x64/
+TrafficGeneratorCsharp/x86/
+TrafficGeneratorCsharp/[Ww][Ii][Nn]32/
+TrafficGeneratorCsharp/[Aa][Rr][Mm]/
+TrafficGeneratorCsharp/[Aa][Rr][Mm]64/
+TrafficGeneratorCsharp/bld/
+TrafficGeneratorCsharp/[Bb]in/
+TrafficGeneratorCsharp/[Oo]bj/
+TrafficGeneratorCsharp/[Ll]og/
+TrafficGeneratorCsharp/[Ll]ogs/
+TrafficGeneratorCsharp/.vscode
