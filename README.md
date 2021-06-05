@@ -75,10 +75,6 @@ and fix the path of BMV2 and P4C
 
 # Known Issues
 
-# Warnings
-* 0 (0x0) value is not supported
-* not yet tested outside mininet
-
 # References
 [Raft](https://raft.github.io/) <br>
 [Scapy](https://scapy.net/) <br>
